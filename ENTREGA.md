@@ -73,4 +73,4 @@ Cada entregável do enunciado → arquivo que o atende. Legenda: ✅ concluído 
 - [ ] Preencher [relatorio_avaliacao.md](etapa-3-avaliacao/relatorio_avaliacao.md) e a seção 4 da [síntese](etapa-4-produto/sintese_executiva.md).
 - [ ] Salvar as capturas em [evidencias/](etapa-2-observabilidade/evidencias/).
 - [ ] Importar os `.xlsx` no Google Sheets.
-- [ ] Criar o repositório no GitHub e fazer o primeiro commit (o projeto ainda não é um repositório Git).
+- [x] Repositório criado e publicado: https://github.com/ElivanLimaJunior/calmaria-spas-ia
