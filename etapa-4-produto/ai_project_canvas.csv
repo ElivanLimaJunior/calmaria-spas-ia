@@ -1,0 +1,27 @@
+Pilar,Bloco,Conteúdo,Tipo,Fonte ou como obter
+Problema,Comportamento atual,O assistente dá recomendações genéricas e respostas inconsistentes; não há visibilidade do comportamento em produção.,Conhecido,Enunciado do projeto
+Problema,Evidências,"Dataset com 50 interações em 6 intenções e 6 categorias. As respostas de referência têm de 72 a 156 caracteres e citam tratamento, duração e preço.",Conhecido,dados/calmaria_interacoes.csv (validado em 2026-10-25)
+Problema,Evidências,"Não existiam traces, scores ou métricas do assistente antes deste projeto.",Conhecido,Enunciado ('pouca visibilidade')
+Problema,Evidências,"Score médio do juiz, % de casos críticos e acurácia de intenção do assistente atual.",A coletar,src/avaliar_respostas.py e src/avaliar_intencoes.py (Etapa 3)
+Problema,Métricas,Conversão do chat em agendamento; satisfação com o atendimento (CSAT); taxa de transbordo para atendente.,A coletar,Sistema de agendamento + pesquisa pós-atendimento
+Problema,Métricas,"Score médio do juiz ≥ 4,0 e casos críticos ≤ 10% na amostra de avaliação.",Meta,Proposta para o Comitê; recalibrar após a primeira execução
+Problema,Usuário-alvo,"Cliente que chega pelo canal digital e não sabe qual tratamento escolher, em especial o cliente novo (20 das 50 interações são de perfil 'novo').",Hipótese,Contagem é Conhecido (dataset); ser o público prioritário é Hipótese (ver proto-persona)
+Dados,Disponíveis,"Pergunta do cliente, categoria, intenção, resposta de referência e perfil (novo, recorrente, vip).",Conhecido,Dataset
+Dados,Disponíveis,"Traces do Langfuse (pergunta, resposta, versão do prompt, tokens, latência, custo) depois da Etapa 2.",A coletar,Execução do pipeline instrumentado
+Dados,Ausentes,"Histórico de agendamentos por cliente; catálogo estruturado (preço, duração, contraindicações); agenda com disponibilidade; feedback explícito; conversões.",A coletar,Sistemas internos (a mapear com TI)
+Dados,Qualidade,"Dataset pequeno, limpo e balanceado (6 a 10 exemplos por intenção, sem nulos nem duplicados). Perguntas bem escritas, provavelmente mais 'limpas' que o chat real.",Conhecido,Validação do dataset (tests/test_dataset.py)
+Dados,Qualidade,Os preços das respostas de referência são os vigentes.,Hipótese,Confirmar com o Comercial
+Dados,Vieses,"Perfis desbalanceados (novo 20, recorrente 19, vip 11); benefício por perfil na referência (id 18); possível viés de gênero na linguagem (id 35); nenhum dado demográfico para medir equidade.",Conhecido,Dataset
+Dados,Limitações,50 linhas não sustentam treinar um modelo de recomendação; servem para avaliação. Respostas de referência afirmam ações e horários que o assistente não pode garantir.,Conhecido,"Dataset + matriz de riscos (R04, R05)"
+IA,Solução híbrida,1) Regras de segurança (contraindicações e encaminhamento em casos de saúde); 2) recomendação por conteúdo (atributos do catálogo × necessidade extraída da pergunta); 3) filtragem colaborativa quando houver histórico; 4) LLM para entender o pedido e redigir a explicação.,Hipótese,Proposta de arquitetura; validar em shadow mode
+IA,Entradas,"Pergunta, intenção classificada, categoria, perfil, histórico (quando houver) e catálogo oficial.",Hipótese,Depende de integração com o catálogo
+IA,Saídas,Até 2 tratamentos + motivo em uma frase + próximo passo; ou encaminhamento para atendente ou profissional.,Meta,Formato definido em prompts/assistente_improved.md
+IA,Cold start,Cliente novo sem histórico: popularidade por categoria + conteúdo. Tratamento novo sem avaliações: conteúdo + curadoria da coordenação técnica.,Hipótese,Validar com teste A/B
+IA,Custo,"Custo por interação = tokens × preço do modelo, medido pelo Langfuse. Valor-alvo a definir com o volume diário real.",A coletar,Langfuse (Etapa 2) + volume de conversas
+IA,Latência aceitável,p95 ≤ 5 s por resposta no chat.,Meta,Proposta; validar com usuários e medir no Langfuse
+IA,Riscos,"Alucinação de preço e horário, recomendação inadequada para condição de saúde, afirmar ação não executada, dependência de fornecedor.",Conhecido,"etapa-1-governanca/matriz_riscos.csv (R03, R04, R05, R10)"
+Experiência,Pontos de contato,Chat do site e do app; sugestões na página de cada tratamento; mensagem pós-sessão com sugestão de continuidade.,Hipótese,Validar com o time de Produto
+Experiência,Feedback,"Botões 👍/👎 em cada recomendação, com motivo opcional ('não era isso', 'caro', 'já fiz'); nota pós-atendimento.",Meta,A implementar
+Experiência,Transparência,Aviso 'Você está falando com a assistente virtual da Calmaria'; link 'Por que esta sugestão?' com o motivo da recomendação.,Meta,Política de uso responsável §4
+Experiência,Correção da recomendação,Cliente pode responder 'não era isso' e receber alternativa; atendente pode corrigir e o caso vira exemplo de avaliação.,Meta,A implementar
+Experiência,Fallback,"Técnico (API fora): mensagem de indisponibilidade + atendente. Qualidade (nota ≤ 2 na avaliação): regenerar com o prompt improved. Saúde: encaminhamento humano, sem recomendação.",Conhecido,Implementado no código da Etapa 3 (fallback por qualidade) e nos prompts; fallback técnico em produção a implementar

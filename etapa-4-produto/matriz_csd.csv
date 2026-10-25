@@ -1,0 +1,17 @@
+Coluna,Item,Origem ou evidência,Como validar ou próximo passo
+Certeza,O assistente atual dá respostas genéricas e inconsistentes.,Enunciado,Quantificar com o score médio do juiz (Etapa 3)
+Certeza,Não havia observabilidade do assistente em produção.,Enunciado,Resolvido pela instrumentação da Etapa 2
+Certeza,Clientes mencionam informações de saúde no texto livre.,"Dataset: ids 21, 34, 43, 46",Medir a frequência real nos traces (com cuidado de privacidade)
+Certeza,As perguntas se dividem em 6 intenções e 6 categorias; 20 de 50 são de clientes novos.,Dataset,Comparar com a distribuição real do chat
+Certeza,O assistente não tem integração com agenda nem com o catálogo.,Arquitetura atual (só LLM),Mapear APIs disponíveis com TI
+Suposição,Recomendações mais específicas aumentam a conversão em agendamento.,Hipótese de produto,Teste A/B: conversão por sessão com IA improved × atual
+Suposição,Clientes novos são os que mais se beneficiam do assistente.,Proto-persona,Entrevistas + conversão por perfil
+Suposição,O prompt improved gera respostas melhores que o baseline.,Desenho do prompt,Comparar no Langfuse e com o juiz (Etapas 2 e 3)
+Suposição,O juiz LLM concorda com avaliadores humanos na maioria dos casos.,Prática comum em LLM-as-Judge,Calibração: humano dá nota às mesmas 10 respostas
+Suposição,Clientes aceitam falar com uma IA se puderem pedir um humano.,Hipótese de experiência,Taxa de pedidos de atendente e CSAT no rollout
+Dúvida,Qual a taxa de conversão atual do chat em agendamento?,Não há dado,Extrair do sistema de agendamento antes do rollout
+Dúvida,Quantas conversas por dia o chat recebe?,Não há dado,Logs do canal; define o custo mensal
+Dúvida,Existe catálogo estruturado com preços e contraindicações?,Não há dado,Levantamento com Comercial e Coordenação Técnica
+Dúvida,Qual a base legal para tratar os dados de saúde mencionados?,Matriz de riscos R02,Parecer do Encarregado e do Jurídico
+Dúvida,Qual latência o cliente tolera no chat?,Meta de 5 s é proposta,Teste com usuários + abandono por faixa de latência
+Dúvida,Os preços das respostas de referência são os vigentes?,Dataset,Confirmar com o Comercial

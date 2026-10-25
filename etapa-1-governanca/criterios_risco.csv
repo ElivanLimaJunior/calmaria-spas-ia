@@ -1,0 +1,6 @@
+Código,Critério,Pergunta,1 = Baixo,2 = Médio,3 = Alto
+C1,Dados,Que tipo de dado a solução trata?,"Sem dados pessoais (agregados, catálogo)","Dados pessoais comuns (nome, histórico, perfil)","Dados sensíveis (saúde, gestação, alergia) ou texto livre que pode contê-los"
+C2,Impacto sobre pessoas,Qual o pior efeito de um erro sobre clientes ou funcionários?,Incômodo ou retrabalho interno,"Experiência ruim, perda financeira pequena e reversível","Dano à integridade física, discriminação ou efeito sobre direitos (preço, emprego)"
+C3,Autonomia,Um humano revisa antes de o resultado produzir efeito?,Só apoio a decisão: humano sempre revisa,"Atua sozinho, mas o efeito é uma sugestão que a pessoa aceita ou não","Atua sozinho e o efeito é aplicado sem revisão (resposta enviada, preço cobrado)"
+C4,Exposição e escala,Quem vê o resultado e em que volume?,"Uso interno, poucas pessoas","Clientes, em volume limitado ou canal secundário","Todos os clientes, canal principal"
+C5,Reversibilidade,Quão fácil é desfazer um erro?,Trivial (corrigir um painel),Exige contato com o cliente ou estorno,"Difícil ou impossível (dano físico, exposição de dado sensível)"

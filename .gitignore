@@ -1,0 +1,12 @@
+# Segredos
+.env
+
+# Ambiente virtual e cache do Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Material de estudo pessoal e pacotes de entrega
+estudos/
+*.zip
